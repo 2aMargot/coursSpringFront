@@ -29,14 +29,20 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Etiquettes</mat-label>
-    <mat-select formControlName = "listeEtiquette" multiple>
-      @for (etiquette of listeEtiquette; track etiquette.id){
-        <mat-option [value]="etiquette">{{etiquette.designation}}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
+<!--  <mat-form-field>-->
+<!--    <mat-label>Etiquettes</mat-label>-->
+<!--    <mat-select formControlName = "listeEtiquette" multiple>-->
+<!--      @for (etiquette of listeEtiquette; track etiquette.id){-->
+<!--        <mat-option [value]="etiquette">{{etiquette.designation}}</mat-option>-->
+<!--      }-->
+<!--    </mat-select>-->
+<!--  </mat-form-field>-->
+
+  <mat-chip-listbox multiple formControlName="listeEtiquette">
+    @for (etiquette of listeEtiquette; track etiquette.id){
+      <mat-chip-option [value]="etiquette">{{etiquette.designation}}</mat-chip-option>
+    }
+  </mat-chip-listbox>
 
   <button type="submit" mat-raised-button color="primary">Ajouter le produit</button>
 </form>

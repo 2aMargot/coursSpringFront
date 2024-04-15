@@ -5,6 +5,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
+import {MatChipListbox, MatChipOption} from "@angular/material/chips";
 
 @Component({
   selector: 'app-edit-produit',
@@ -14,7 +15,7 @@ import {HttpClient} from "@angular/common/http";
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, MatChipListbox, MatChipOption
   ],
   templateUrl: './edit-produit.component.html',
   styleUrl: './edit-produit.component.scss'
@@ -50,6 +51,10 @@ export class EditProduitComponent implements OnInit{
 
 
   onSubmit(){
-    console.log(this.formulaire.value);
+    if(this.formulaire.valid){
+      this.http
+        .post("http://localhost:8080/produit", this.formulaire.value)
+        .subscribe((resultat)=> console.log(resultat))
+    }
   }
 }

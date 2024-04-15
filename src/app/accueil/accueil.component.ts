@@ -2,11 +2,12 @@ import {Component, inject, OnInit} from '@angular/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {LabelComponent} from "../label/label.component";
 
 @Component({
   selector: 'app-accueil',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule],
+  imports: [MatCardModule, MatButtonModule, LabelComponent],
   templateUrl: './accueil.component.html',
   styleUrl: './accueil.component.scss'
 })
