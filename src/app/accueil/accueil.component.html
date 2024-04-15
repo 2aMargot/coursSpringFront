@@ -1,0 +1,40 @@
+<div class="container">
+
+  <div class="row">
+
+    @for(produit of listeProduit; track produit.id){
+
+    <div class="col-6 mt-4">
+
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{produit.nom }}</mat-card-title>
+          <mat-card-subtitle>{{produit.code }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>
+            {{produit.description}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">Ajouter au panier</button>
+          <button mat-raised-button color="accent">Modifier</button>
+          <button mat-raised-button color="warning" (click)="onSupprimerProduit(produit.id)" >Supprimer</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
+    }
+  </div>
+
+</div>
+
+<ul>
+
+
+
+
+
+</ul>

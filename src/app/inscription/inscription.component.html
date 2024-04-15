@@ -1,0 +1,51 @@
+<form class="formulaire" [formGroup]="formulaire" (ngSubmit)="onInscription()">
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" placeholder="Ex. mon-nom@domain.com">
+
+    @if(formulaire.get("email")?.hasError('required')){
+      <mat-error>L'email est obligatoire</mat-error>
+    }
+    @if(formulaire.get("email")?.hasError('email')){
+      <mat-error>L'email est mal formé</mat-error>
+    }
+
+
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Mot de passe</mat-label>
+    <input matInput
+           formControlName="motDePasse"
+           (change)="verifierMotDePasseIdentique()"
+           [type]="afficherMotDePasse ? 'password' : 'text'">
+    <button type="button" mat-icon-button matSuffix (click)="afficherMotDePasse = !afficherMotDePasse" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="afficherMotDePasse">
+      <mat-icon>{{afficherMotDePasse ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </button>
+
+    <mat-error>Le mot de passe est obligatoire</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Confirmer le mot de passe</mat-label>
+    <input matInput
+           [(ngModel)]="confirmationMotDePasse"
+           [ngModelOptions] = "{standalone : true}"
+           (change)="verifierMotDePasseIdentique()"
+           [type]="afficherMotDePasseConfirmer ? 'password' : 'text'">
+    <button type="button" mat-icon-button matSuffix (click)="afficherMotDePasseConfirmer = !afficherMotDePasseConfirmer" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="afficherMotDePasseConfirmer">
+      <mat-icon>{{afficherMotDePasseConfirmer ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </button>
+
+    @if (motDePasseDifferent){
+    <mat-error>Les mots de passes ne sont identiques</mat-error>
+    }
+  </mat-form-field>
+
+  <button type="submit" mat-raised-button color="primary">Créer mon compte</button>
+
+  <button>
+
+  </button>
+</form>
