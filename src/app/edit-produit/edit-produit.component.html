@@ -1,4 +1,4 @@
-<form class="formulaire" [formGroup]="formulaire" (ngSubmit)="onSubmit()" >
+<form class="formulaire" [formGroup]="formulaire" (ngSubmit)="onSubmit()">
 
   <mat-form-field>
     <mat-label>Nom</mat-label>
@@ -22,27 +22,37 @@
 
   <mat-form-field>
     <mat-label>Etat</mat-label>
-    <mat-select formControlName = "etat">
-      @for (etat of listeEtat; track etat.id){
-        <mat-option [value]="etat">{{etat.designation}}</mat-option>
+    <mat-select formControlName="etat" [compareWith]="comparateurEtat">
+      @for (etat of listeEtat; track etat.id) {
+        <mat-option [value]="etat">{{ etat.designation }}</mat-option>
       }
     </mat-select>
   </mat-form-field>
 
-<!--  <mat-form-field>-->
-<!--    <mat-label>Etiquettes</mat-label>-->
-<!--    <mat-select formControlName = "listeEtiquette" multiple>-->
-<!--      @for (etiquette of listeEtiquette; track etiquette.id){-->
-<!--        <mat-option [value]="etiquette">{{etiquette.designation}}</mat-option>-->
-<!--      }-->
-<!--    </mat-select>-->
-<!--  </mat-form-field>-->
+  <mat-form-field>
+    <mat-label>Etiquettes</mat-label>
+    <mat-select
+      formControlName="listeEtiquette"
+      multiple
+      [compareWith]="comparateurEtat"
+    >
+      @for (etiquette of listeEtiquette; track etiquette.id) {
+        <mat-option [value]="etiquette">{{ etiquette.designation }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
 
-  <mat-chip-listbox multiple formControlName="listeEtiquette">
-    @for (etiquette of listeEtiquette; track etiquette.id){
-      <mat-chip-option [value]="etiquette">{{etiquette.designation}}</mat-chip-option>
-    }
-  </mat-chip-listbox>
+  <!--  <mat-chip-listbox-->
+  <!--    multiple-->
+  <!--    formControlName="listeEtiquette"-->
+  <!--    [compareWith]="comparateurEtat"-->
+  <!--  >-->
+  <!--    @for (etiquette of listeEtiquette; track etiquette.id){-->
+  <!--      <mat-chip-option [value]="etiquette">{{etiquette.designation}}</mat-chip-option>-->
+  <!--    }-->
+  <!--  </mat-chip-listbox>-->
 
-  <button type="submit" mat-raised-button color="primary">Ajouter le produit</button>
+  <button type="submit" mat-raised-button color="primary">
+    {{idProduit == null ? "Ajouter le produit" : "Modifier le produit"}}
+  </button>
 </form>
