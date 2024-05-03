@@ -5,6 +5,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {AuthentificationService} from "../authentification.service";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-connexion',
@@ -26,6 +28,7 @@ export class ConnexionComponent {
   http: HttpClient = inject(HttpClient);
   router: Router = inject(Router);
   erreurConnexion: boolean = false;
+  authentification = inject(AuthentificationService);
 
   formulaire: FormGroup = this.formBuilder.group({
     email: ["z@z.com",[Validators.email, Validators.required]],
@@ -34,11 +37,13 @@ export class ConnexionComponent {
 
 
   onConnexion() {
+    environment
     if(this.formulaire.valid){
-      this.http.post<{jwt: string}>("http://localhost:8080/connexion", this.formulaire.value)
+      this.http.post<{jwt: string}>("http://" + environment.urlServeur +"/connexion", this.formulaire.value)
         .subscribe( {
           next: (resultat => {
             localStorage.setItem('jwt', resultat.jwt);
+            this.authentification.authenticationAvecJwtLocalStorage();
             this.router.navigateByUrl('/accueil');
           }),
           error : (response) => {

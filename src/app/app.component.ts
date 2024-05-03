@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {HeaderComponent} from "./header/header.component";
+import {AuthentificationService} from "./authentification.service";
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,11 @@ import {HeaderComponent} from "./header/header.component";
 })
 export class AppComponent {
   title = 'backoffice-cours-spring';
+  authentification = inject(AuthentificationService);
+
+  ngOnInit(){
+    this.authentification.authenticationAvecJwtLocalStorage()
+    }
+
+
 }

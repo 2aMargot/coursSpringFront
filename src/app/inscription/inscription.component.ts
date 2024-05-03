@@ -5,6 +5,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from '@angular/material/icon';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-inscription',
@@ -38,12 +39,13 @@ export class InscriptionComponent {
   motDePasseDifferent: boolean = false;
 
   onInscription() {
+    environment
 
     this.motDePasseDifferent =
       this.formulaire.get("motDePasse")?.value != this.confirmationMotDePasse;
 
     if(this.formulaire.valid && !this.motDePasseDifferent){
-      this.http.post("http://localhost:8080/inscription", this.formulaire.value)
+      this.http.post("http://" + environment.urlServeur +"/inscription", this.formulaire.value)
         .subscribe(resultat => console.log(resultat));
 
     }

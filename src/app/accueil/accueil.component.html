@@ -1,6 +1,8 @@
 <div class="container">
 
+  @if (authentification.utilisateur?.admin == 1){
   <a routerLink="/edit-produit" mat-raised-button color="primary">Ajouter un article</a>
+  }
 
   <div class="row">
 
@@ -30,9 +32,10 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary">Ajouter au panier</button>
+          @if (authentification.utilisateur?.admin == 1){
           <button mat-raised-button color="accent" [routerLink]="['/edit-produit', produit.id]">Modifier</button>
           <button mat-raised-button color="warning" (click)="onSupprimerProduit(produit.id)" >Supprimer</button>
+          }
         </mat-card-actions>
       </mat-card>
 
